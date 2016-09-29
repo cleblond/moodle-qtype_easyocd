@@ -204,13 +204,39 @@ M.qtype_easyocd = {
         answernumSpan.innerHTML = M.util.get_string('viewing_answer1', 'qtype_easyocd');
         warningspan.appendChild(answernumSpan);
 
-        var newIframe = document.createElement("iframe");
+       /* var newIframe = document.createElement("iframe");
         newIframe.src = marvinpath + "/editor.html";
         newIframe.className = "sketcher-frame";
         newIframe.id = "MSketch";
         newIframe.width = "600";
         newIframe.height = "460";
-        warningspan.appendChild(newIframe);
+        warningspan.appendChild(newIframe);  */
+
+        var cdscript = document.createElement("SCRIPT");
+        //chemdoodlescript = marvinpath + "/editor.html";
+        //chemdoodlescript.className = "sketcher-frame";
+        cdscript.type  = "text/javascript";
+        //cdscript.src   = "path/to/your/javascript.js";    // use this for linked script
+        cdscript.text  = "alert('voila!');"  
+          cdscript.text = "
+	  +"ChemDoodle.ELEMENT['H'].jmolColor = 'black';"
+	  +"ChemDoodle.ELEMENT['S'].jmolColor = '#B9A130';"
+	  +"var sketcher = new ChemDoodle.SketcherCanvas('sketcher', 500, 300,{useServices:true});"
+	  +"sketcher.specs.atoms_displayTerminalCarbonLabels_2D = true;"
+	  +"sketcher.specs.atoms_useJMOLColors = true;"
+	  +"sketcher.specs.bonds_clearOverlaps_2D = true;"
+	  +"sketcher.specs.shapes_color = '#c10000';"
+	  +"sketcher.repaint();'";
+
+
+
+            
+        warningspan.appendChild(cdscript);
+
+
+
+
+
         //import structure
         var marvinController;
         MarvinJSUtil.getEditor("#MSketch").then(function(
