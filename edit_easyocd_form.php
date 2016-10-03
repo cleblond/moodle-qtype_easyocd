@@ -32,6 +32,9 @@ class qtype_easyocd_edit_form extends qtype_shortanswer_edit_form {
         $protocol = (empty($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off') ? 'http://' : 'https://';
         $PAGE->requires->js(new moodle_url($protocol . $_SERVER['HTTP_HOST'] . $marvinjspath . '/ChemDoodleWeb.js'));
         $PAGE->requires->js(new moodle_url($protocol . $_SERVER['HTTP_HOST'] . $marvinjspath . '/uis/ChemDoodleWeb-uis.js'));
+        $arguments = 'test';
+        $this->page->requires->js_call_amd('question_type_easyocd/easyocd', 'init', $arguments);
+
         $mform->addElement('static', 'answersinstruct',
             get_string('correctanswers', 'qtype_easyocd'), get_string('filloutoneanswer', 'qtype_easyocd'));
         $mform->closeHeaderBefore('answersinstruct');
